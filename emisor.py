@@ -12,6 +12,8 @@ def crear_paquete(mensaje, emisor, receptor, llave_privada_emisor, llave_publica
 
     # El mensaje se cifra usando la clave de sesión
     mensaje_cifrado = cifrar_mensaje(mensaje, clave_sesion)
+    
+    print("\nMensaje cifrado:", mensaje_cifrado)
 
     e, n = llave_publica_receptor
 
