@@ -53,6 +53,8 @@ def generar_llaves():
 # generamos las llaves y obtenemos todos los datos correspondiente para autoexplicarnos lo que esta sucediendo
 p, q, n, phi, e, d, llave_publica, llave_privada = generar_llaves()
 
+"""""
+Comentarios de explicación ahora no necesarios.
 print("Generamos las llaves\n")
 
 print(f"p (primo): {p}")
@@ -73,3 +75,4 @@ print("(Esta llave se puede compartir)\n")
 
 print(f"Llave privada: (d={d}, n={n})")
 print("(Esta llave debe mantenerse en secreto)\n")
+"""
