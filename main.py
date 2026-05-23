@@ -130,7 +130,7 @@ if __name__ == "__main__":
     )
 
     # 7. Paquete JSON incompleto
-    print("\n# 7. Paquete JSON incompleto")
+    print("\n7. Paquete JSON incompleto")
     with open("paquete.json", "r") as archivo:
         paquete_incompleto = json.load(archivo)
 
@@ -147,17 +147,18 @@ if __name__ == "__main__":
     )
 
     # 8. Paquete JSON con datos mal formados
+    print("\n8. Paquete JSON con datos mal formados")
     
+    # JSON no valido
+    with open("paquete_mal_formado.json", "w") as archivo:
+        archivo.write(
+            '{ "sender": "Ivanovich", "receiver": "Daniel", '
+        )
+
+    # Validacion en receptor.py ayuda en esta validación s
+    recibir_paquete(
+        "paquete_mal_formado.json",
+        llave_privada_daniel
+    )
+
     # 9. Firma que no corresponde al mensaje recibido
-
-    """""
-    # entrada inválida
-    try:
-        firmar(12345, llave_privada)
-    except:
-        print("error detectado en entrada inválida")
-
-    # firma incorrecta
-    firma_falsa = firma + 1
-    print("firma falsa válida:", verificar(mensaje, firma_falsa, llave_publica))
-    """""

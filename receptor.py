@@ -10,11 +10,11 @@ def recibir_paquete(ruta_json, llave_privada_receptor):
             paquete = json.load(archivo)
 
     except FileNotFoundError:
-        print("Error: archivo JSON no encontrado")
+        print("Error: Archivo JSON no encontrado")
         return
 
     except json.JSONDecodeError:
-        print("Error: el archivo JSON está mal formado")
+        print("Error: El archivo JSON está mal formado")
         return
     
     campos_json = [
