@@ -4,15 +4,18 @@ from cifrados import crear_clave_sesion
 from cifrados import cifrar_mensaje
 
 def crear_paquete_json(mensaje, emisor, receptor, llave_privada_emisor, llave_publica_emisor, llave_publica_receptor):
-    # Firma mensaje original
+    # La firma se genera con la llave privada del emisor
     firma = firmar(mensaje, llave_privada_emisor)
 
+    # 1. El emisor genera una clave de sesión
     clave_sesion = crear_clave_sesion()
 
+    # 2. El mensaje se cifra usando la clave de sesión
     mensaje_cifrado = cifrar_mensaje(mensaje, clave_sesion)
 
     e, n = llave_publica_receptor
 
+    # 3. La clave de sesión se cifra usando la llave pública RSA del receptor
     clave_sesion_cifrada = pow(clave_sesion, e, n)
 
     paquete = {
