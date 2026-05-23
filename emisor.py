@@ -7,15 +7,15 @@ def crear_paquete(mensaje, emisor, receptor, llave_privada_emisor, llave_publica
     # La firma se genera con la llave privada del emisor
     firma = firmar(mensaje, llave_privada_emisor)
 
-    # 1. El emisor genera una clave de sesión
+    # El emisor genera una clave de sesión
     clave_sesion = crear_clave_sesion()
 
-    # 2. El mensaje se cifra usando la clave de sesión
+    # El mensaje se cifra usando la clave de sesión
     mensaje_cifrado = cifrar_mensaje(mensaje, clave_sesion)
 
     e, n = llave_publica_receptor
 
-    # 3. La clave de sesión se cifra usando la llave pública RSA del receptor
+    # La clave de sesión se cifra usando la llave pública RSA del receptor
     clave_sesion_cifrada = pow(clave_sesion, e, n)
 
     paquete = {

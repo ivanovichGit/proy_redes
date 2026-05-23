@@ -4,6 +4,7 @@ from cifrados import descifrar_mensaje
 from verificar import verificar
 
 def recibir_paquete(ruta_json, llave_privada_receptor):
+    # Leer el paquete JSON;
     try:
         with open(ruta_json, "r") as archivo:
             paquete = json.load(archivo)
@@ -32,6 +33,7 @@ def recibir_paquete(ruta_json, llave_privada_receptor):
             return
     
     # Extraer datos JSON a variables
+    # Identificar al emisor y al receptor del JSON
     emisor = paquete["sender"]
     receptor = paquete["receiver"]
     mensaje_cifrado = paquete["encrypted_message"]
@@ -41,11 +43,12 @@ def recibir_paquete(ruta_json, llave_privada_receptor):
     n = paquete["sender_public_key"]["n"]
     llave_publica_emisor = (e, n)
 
-    # 4. El receptor usa su llave privada RSA para recuperar la clave de sesión.
+    # El receptor usa su llave privada RSA para recuperar la clave de sesión.
+    # Recuperar la clave de sesión usando la llave privada del receptor
     d, n_receptor = llave_privada_receptor
     clave_sesion = pow(clave_sesion_cifrada, d, n_receptor)
 
-    # 5. El receptor usa la clave de sesión para descifrar el mensaje.
+    # El receptor usa la clave de sesión para descifrar el mensaje.
     mensaje_descifrado = descifrar_mensaje(mensaje_cifrado, clave_sesion)
 
     print("\nMENSAJE RECIBIDO")
@@ -56,9 +59,10 @@ def recibir_paquete(ruta_json, llave_privada_receptor):
 
     print("Mensaje descifrado:", mensaje_descifrado)
 
-    # Verificamos Firma
+    # Verificar la firma digital usando la llave pública del emisor;
     firma_valida = verificar(mensaje_descifrado, firma, llave_publica_emisor)
 
+    # Indicar si el mensaje es válido o inválido y mostrar explicación del resultado 
     print("\nVERIFICACIÓN")
     if firma_valida:
         print("La firma es válida.")
