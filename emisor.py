@@ -3,7 +3,7 @@ from firmar import firmar
 from cifrados import crear_clave_sesion
 from cifrados import cifrar_mensaje
 
-def crear_paquete_json(mensaje, emisor, receptor, llave_privada_emisor, llave_publica_emisor, llave_publica_receptor):
+def crear_paquete(mensaje, emisor, receptor, llave_privada_emisor, llave_publica_emisor, llave_publica_receptor):
     # La firma se genera con la llave privada del emisor
     firma = firmar(mensaje, llave_privada_emisor)
 
