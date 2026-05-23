@@ -89,11 +89,11 @@ if __name__ == "__main__":
     paquete_alterado["signature"] += 1
 
     # Guardamos JSON alterado 
-    with open("paquete_firma_alterada.json", "w") as archivo:
+    with open("paquete_V4_firma_alterada.json", "w") as archivo:
         json.dump(paquete_alterado, archivo, indent=4)
 
     resultado_firma_alterada = recibir_paquete(
-        "paquete_firma_alterada.json",
+        "paquete_V4_firma_alterada.json",
         llave_privada_daniel
     )
 
@@ -137,12 +137,12 @@ if __name__ == "__main__":
     # Se elimina un campo del JSON y se guarda como nuevo 
     del paquete_incompleto["signature"]
 
-    with open("paquete_incompleto.json", "w") as archivo:
+    with open("paquete_V7_incompleto.json", "w") as archivo:
         json.dump(paquete_incompleto, archivo, indent=4)
 
     # Validacion en receptor.py ayuda en esta validación 
     recibir_paquete(
-        "paquete_incompleto.json",
+        "V7_paquete_incompleto.json",
         llave_privada_daniel
     )
 
@@ -150,14 +150,14 @@ if __name__ == "__main__":
     print("\n8. Paquete JSON con datos mal formados")
     
     # JSON no valido
-    with open("paquete_mal_formado.json", "w") as archivo:
+    with open("paquete_V8_mal_formado.json", "w") as archivo:
         archivo.write(
             '{ "sender": "Ivanovich", "receiver": "Daniel", '
         )
 
     # Validacion en receptor.py ayuda en esta validación s
     recibir_paquete(
-        "paquete_mal_formado.json",
+        "paquete_V8_mal_formado.json",
         llave_privada_daniel
     )
 
@@ -169,10 +169,10 @@ if __name__ == "__main__":
     # Que se modifica el primer numero del mensaje cifrado 
     paquete_inconsistente["encrypted_message"][0] += 1
 
-    with open("paquete_firma_no_corresponde.json", "w") as archivo:
+    with open("paquete_V9_firma_no_corresponde.json", "w") as archivo:
         json.dump(paquete_inconsistente, archivo, indent=4)
     
     recibir_paquete(
-        "paquete_firma_no_corresponde.json",
+        "paquete_V9_firma_no_corresponde.json",
         llave_privada_daniel
     )
