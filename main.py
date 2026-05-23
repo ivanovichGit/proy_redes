@@ -32,7 +32,7 @@ if __name__ == "__main__":
         mensaje=mensaje,
         emisor="Ivanovich",
         receptor="Daniel",
-        llave_privada_emisor=llave_publica_ivanovich,
+        llave_privada_emisor=llave_privada_ivanovich,
         llave_publica_emisor=llave_publica_ivanovich,
         llave_publica_receptor=llave_publica_daniel
     )
