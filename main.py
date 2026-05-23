@@ -1,14 +1,10 @@
 from generar_llaves import generar_llaves
-from firmar import firmar
-from verificar import verificar
-from generar_llaves import generar_llaves
 from emisor import crear_paquete
 from receptor import recibir_paquete
+from verificar import verificar
+from firmar import firmar
 
 if __name__ == "__main__":
-    # generar llaves
-    p, q, n, phi, e, d, llave_publica, llave_privada = generar_llaves()
-
     # IVANOVICH (EMISOR)
     _, _, _, _, _, _, llave_publica_ivanovich, llave_privada_ivanovich = generar_llaves()
 
@@ -25,7 +21,7 @@ if __name__ == "__main__":
     print("Llave privada:", llave_privada_daniel)
 
     # mensaje original
-    mensaje = "Hola Daniel, este es un mensaje original, ya casi nos graduamos :)"
+    mensaje = "Hola Daniel, este es un mensaje original :)"
 
     print("\n---- CREANDO PAQUETE ----")
     paquete = crear_paquete(
@@ -39,15 +35,55 @@ if __name__ == "__main__":
     print("\nPaquete JSON generado correctamente.")
 
     print("\n---- RECEPCIÓN DEL MENSAJE ----")
-    recibir_paquete(
+    mensaje_descifrado = recibir_paquete(
         "paquete.json",
         llave_privada_daniel
     )
-    
-    """""
-    print("\nVALIDACIONES")
 
-    # caso de mensaje vacío
+    mensaje_descifrado 
+    firma = paquete["signature"]
+    
+    print("\n---- VALIDACIONES ----")
+
+    # Verificar la firma digital usando la llave pública del emisor;
+    firma_valida = verificar(mensaje_descifrado, firma, llave_publica_ivanovich)
+    
+    # 1. Mensaje válido enviado del emisor al receptor;
+    print("\nCaso mensaje válido")
+    if firma_valida:
+        print("La firma es válida.")
+        print("El mensaje no fue alterado y corresponde al emisor.")
+    else:
+        print("La firma NO es válida.")
+        print("El mensaje pudo haber sido alterado o la llave pública es incorrecta.")
+
+    # 2. Mensaje vacío
+    print("\nCaso mensaje vacío")
+    try:
+        firma_vacia = firmar("", llave_privada_ivanovich)
+        print("Mensaje vacío firmado:", firma_vacia)
+    except ValueError as e:
+        print("Error detectado:", e)
+    
+    # 3. Mensaje alterado después de haber sido firmado
+    
+    # 4. Firma alterada manualmente dentro del JSON
+    
+    # 5. Intento de verificación con una llave pública incorrecta
+    
+    # 6. Intento de descifrado con la llave privada de otro usuario
+    
+    # 7. Paquete JSON incompleto
+    
+    # 8. Paquete JSON con datos mal formados
+    
+    # 9. Firma que no corresponde al mensaje recibido
+
+    """""
+    print("\nVERIFICACIÓN")
+    
+
+    # Caso de mensaje vacío
     try:
         firma_vacia = firmar("", llave_privada)
         print("mensaje vacío firmado:", firma_vacia)
@@ -71,4 +107,4 @@ if __name__ == "__main__":
     # firma incorrecta
     firma_falsa = firma + 1
     print("firma falsa válida:", verificar(mensaje, firma_falsa, llave_publica))
-    """
+    """""

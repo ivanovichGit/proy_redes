@@ -59,14 +59,4 @@ def recibir_paquete(ruta_json, llave_privada_receptor):
 
     print("Mensaje descifrado:", mensaje_descifrado)
 
-    # Verificar la firma digital usando la llave pública del emisor;
-    firma_valida = verificar(mensaje_descifrado, firma, llave_publica_emisor)
-
-    # Indicar si el mensaje es válido o inválido y mostrar explicación del resultado 
-    print("\nVERIFICACIÓN")
-    if firma_valida:
-        print("La firma es válida.")
-        print("El mensaje no fue alterado y corresponde al emisor.")
-    else:
-        print("La firma NO es válida.")
-        print("El mensaje pudo haber sido alterado o la llave pública es incorrecta.")
+    return mensaje_descifrado, firma
