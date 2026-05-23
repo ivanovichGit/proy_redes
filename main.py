@@ -1,3 +1,4 @@
+import json
 from generar_llaves import generar_llaves
 from emisor import crear_paquete
 from receptor import recibir_paquete
@@ -69,7 +70,7 @@ if __name__ == "__main__":
     print("\n3. Caso mensaje alterado después de haber sido firmado")
     
     mensaje_alterado = "Hola Daniel, este es un mensaje alterado"
-    firma_valida = verificar(mensaje_alterado, firma, llave_privada_ivanovich)
+    firma_valida = verificar(mensaje_alterado, firma, llave_publica_ivanovich)
     
     if firma_valida:
         # Por si no marca error, no deberia de ser validada de todos modos
@@ -78,9 +79,32 @@ if __name__ == "__main__":
         print("La firma NO es válida.")
         print("El mensaje fue modificado después de ser firmado.")
 
-    
     # 4. Firma alterada manualmente dentro del JSON
+    print("\n4. Firma alterada manualmente dentro del JSON")
     
+    # Abrir json 
+    with open("paquete.json", "r") as archivo:
+        paquete_alterado = json.load(archivo)
+
+    paquete_alterado["signature"] += 1
+
+    # Guardamos JSON alterado 
+    with open("paquete_firma_alterada.json", "w") as archivo:
+        json.dump(paquete_alterado, archivo, indent=4)
+
+    resultado_firma_alterada = recibir_paquete(
+        "paquete_firma_alterada.json",
+        llave_privada_daniel
+    )
+
+    mensaje_descifrado_alterado, firma_alterada = resultado_firma_alterada
+    firma_valida = verificar(mensaje_descifrado_alterado, firma_alterada, llave_publica_ivanovich)
+
+    if firma_valida:
+        print("Error: La firma alterada sigue siendo válida")
+    else:
+        print("La firma fue modificada manualmente dentro del JSON.")
+
     # 5. Intento de verificación con una llave pública incorrecta
     
     # 6. Intento de descifrado con la llave privada de otro usuario

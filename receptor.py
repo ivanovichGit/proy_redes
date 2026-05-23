@@ -51,12 +51,18 @@ def recibir_paquete(ruta_json, llave_privada_receptor):
     # El receptor usa la clave de sesión para descifrar el mensaje.
     mensaje_descifrado = descifrar_mensaje(mensaje_cifrado, clave_sesion)
 
-    print("\nMENSAJE RECIBIDO")
+    firma_valida = verificar(mensaje_descifrado, firma, llave_publica_emisor)
 
-    print("De:", emisor)
+    if firma_valida:
+        print("\nMENSAJE RECIBIDO")
 
-    print("Para:", receptor)
+        print("De:", emisor)
 
-    print("Mensaje descifrado:", mensaje_descifrado)
+        print("Para:", receptor)
+
+        print("Mensaje descifrado:", mensaje_descifrado)
+    else:
+        print("La firma NO es válida.")
+        print("No se muestra el mensaje descifrado porque el paquete no pasó la validación.")
 
     return mensaje_descifrado, firma
