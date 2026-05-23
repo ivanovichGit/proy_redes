@@ -162,3 +162,17 @@ if __name__ == "__main__":
     )
 
     # 9. Firma que no corresponde al mensaje recibido
+    print("\n9. Firma que no corresponde al mensaje recibido")
+    with open("paquete.json", "r") as archivo:
+        paquete_inconsistente = json.load(archivo)
+    
+    # Que se modifica el primer numero del mensaje cifrado 
+    paquete_inconsistente["encrypted_message"][0] += 1
+
+    with open("paquete_firma_no_corresponde.json", "w") as archivo:
+        json.dump(paquete_inconsistente, archivo, indent=4)
+    
+    recibir_paquete(
+        "paquete_firma_no_corresponde.json",
+        llave_privada_daniel
+    )
