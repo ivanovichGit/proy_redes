@@ -106,9 +106,29 @@ if __name__ == "__main__":
         print("La firma fue modificada manualmente dentro del JSON.")
 
     # 5. Intento de verificación con una llave pública incorrecta
-    
+    print("\n5. Intento de verificación con una llave pública incorrecta")
+
+    _, _, _, _, _, _, otra_pub, otra_priv = generar_llaves()
+    firma_valida = verificar(
+        mensaje,
+        firma,
+        otra_pub
+    )
+    if firma_valida:
+        print("Error: la firma fue validada con una llave incorrecta")
+    else:
+        print("La firma NO es válida.")
+        print("La llave pública no corresponde al emisor.")
+        
     # 6. Intento de descifrado con la llave privada de otro usuario
-    
+    print("\n6. Intento de descifrado con la llave privada de otro usuario")
+    _, _, _, _, _, _, llave_publica_vanessa, llave_privada_vanessa = generar_llaves()
+
+    recibir_paquete(
+        "paquete.json",
+        llave_privada_vanessa
+    )
+
     # 7. Paquete JSON incompleto
     
     # 8. Paquete JSON con datos mal formados
@@ -116,14 +136,6 @@ if __name__ == "__main__":
     # 9. Firma que no corresponde al mensaje recibido
 
     """""
-    # caso mensaje alterado
-    mensaje2 = "esto es un mensaje alterado"
-    print("firma válida con mensaje alterado:", verificar(mensaje2, firma, llave_publica))
-
-    # llave incorrecta
-    _, _, _, _, _, _, otra_pub, otra_priv = generar_llaves()
-    print("firma válida con llave incorrecta:", verificar(mensaje, firma, otra_pub))
-
     # entrada inválida
     try:
         firmar(12345, llave_privada)
