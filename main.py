@@ -12,7 +12,7 @@ if __name__ == "__main__":
     # DANIEL (RECEPTOR)
     _, _, _, _, _, _, llave_publica_daniel, llave_privada_daniel = generar_llaves()
 
-    print("\n---- LLAVES GENERADAS ----")
+    print("\n---- LLAVES GENERADAS Y MENSAJE ----")
     print("\nIVANOVICH")
     print("Llave pública:", llave_publica_ivanovich)
     print("Llave privada:", llave_privada_ivanovich)
@@ -23,6 +23,8 @@ if __name__ == "__main__":
 
     # mensaje original
     mensaje = "Hola Daniel, este es un mensaje original :)"
+    
+    print("\nMensaje original:", mensaje)
 
     print("\n---- CREANDO PAQUETE ----")
     paquete = crear_paquete(
