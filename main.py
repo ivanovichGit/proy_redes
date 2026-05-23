@@ -130,7 +130,22 @@ if __name__ == "__main__":
     )
 
     # 7. Paquete JSON incompleto
-    
+    print("\n# 7. Paquete JSON incompleto")
+    with open("paquete.json", "r") as archivo:
+        paquete_incompleto = json.load(archivo)
+
+    # Se elimina un campo del JSON y se guarda como nuevo 
+    del paquete_incompleto["signature"]
+
+    with open("paquete_incompleto.json", "w") as archivo:
+        json.dump(paquete_incompleto, archivo, indent=4)
+
+    # Validacion en receptor.py ayuda en esta validación 
+    recibir_paquete(
+        "paquete_incompleto.json",
+        llave_privada_daniel
+    )
+
     # 8. Paquete JSON con datos mal formados
     
     # 9. Firma que no corresponde al mensaje recibido

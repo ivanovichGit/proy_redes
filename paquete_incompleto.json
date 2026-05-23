@@ -47,7 +47,6 @@
         97
     ],
     "encrypted_session_key": 1009,
-    "signature": 1041,
     "hash_algorithm": "SHA-256",
     "sender_public_key": {
         "e": 5,
