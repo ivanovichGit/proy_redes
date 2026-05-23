@@ -4,7 +4,7 @@ from cifrados import descifrar_mensaje
 from verificar import verificar
 
 def recibir_paquete(ruta_json, llave_privada_receptor):
-    # Leer el paquete JSON;
+    # Leer el paquete JSON
     try:
         with open(ruta_json, "r") as archivo:
             paquete = json.load(archivo)
