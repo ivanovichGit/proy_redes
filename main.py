@@ -35,13 +35,13 @@ if __name__ == "__main__":
     print("\nPaquete JSON generado correctamente.")
 
     print("\n---- RECEPCIÓN DEL MENSAJE ----")
-    mensaje_descifrado = recibir_paquete(
+    resultado_recepcion = recibir_paquete(
         "paquete.json",
         llave_privada_daniel
     )
 
-    mensaje_descifrado 
-    firma = paquete["signature"]
+    # Para hacer las validaciones en main 
+    mensaje_descifrado, firma = resultado_recepcion
     
     print("\n---- VALIDACIONES ----")
 
@@ -49,7 +49,7 @@ if __name__ == "__main__":
     firma_valida = verificar(mensaje_descifrado, firma, llave_publica_ivanovich)
     
     # 1. Mensaje válido enviado del emisor al receptor;
-    print("\nCaso mensaje válido")
+    print("\n1. Caso mensaje válido")
     if firma_valida:
         print("La firma es válida.")
         print("El mensaje no fue alterado y corresponde al emisor.")
@@ -58,14 +58,26 @@ if __name__ == "__main__":
         print("El mensaje pudo haber sido alterado o la llave pública es incorrecta.")
 
     # 2. Mensaje vacío
-    print("\nCaso mensaje vacío")
+    print("\n2. Caso mensaje vacío")
     try:
         firma_vacia = firmar("", llave_privada_ivanovich)
         print("Mensaje vacío firmado:", firma_vacia)
-    except ValueError as e:
-        print("Error detectado:", e)
+    except:
+        print("Error con mensaje vacío")
     
     # 3. Mensaje alterado después de haber sido firmado
+    print("\n3. Caso mensaje alterado después de haber sido firmado")
+    
+    mensaje_alterado = "Hola Daniel, este es un mensaje alterado"
+    firma_valida = verificar(mensaje_alterado, firma, llave_privada_ivanovich)
+    
+    if firma_valida:
+        # Por si no marca error, no deberia de ser validada de todos modos
+        print("Error: La firma sigue siendo válida")
+    else:
+        print("La firma NO es válida.")
+        print("El mensaje fue modificado después de ser firmado.")
+
     
     # 4. Firma alterada manualmente dentro del JSON
     
@@ -80,16 +92,6 @@ if __name__ == "__main__":
     # 9. Firma que no corresponde al mensaje recibido
 
     """""
-    print("\nVERIFICACIÓN")
-    
-
-    # Caso de mensaje vacío
-    try:
-        firma_vacia = firmar("", llave_privada)
-        print("mensaje vacío firmado:", firma_vacia)
-    except:
-        print("error con mensaje vacío")
-
     # caso mensaje alterado
     mensaje2 = "esto es un mensaje alterado"
     print("firma válida con mensaje alterado:", verificar(mensaje2, firma, llave_publica))
