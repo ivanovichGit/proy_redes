@@ -7,17 +7,30 @@ from firmar import firmar
 
 if __name__ == "__main__":
     # IVANOVICH (EMISOR)
-    _, _, _, _, _, _, llave_publica_ivanovich, llave_privada_ivanovich = generar_llaves()
-
+    # _, _, _, _, _, _, llave_publica_ivanovich, llave_privada_ivanovich = generar_llaves()
+    p_i, q_i, n_i, phi_i, e_i, d_i, llave_publica_ivanovich, llave_privada_ivanovich = generar_llaves()
+    
     # DANIEL (RECEPTOR)
-    _, _, _, _, _, _, llave_publica_daniel, llave_privada_daniel = generar_llaves()
+    p_d, q_d, n_d, phi_d, e_d, d_d, llave_publica_daniel, llave_privada_daniel = generar_llaves()
 
     print("\n---- LLAVES GENERADAS Y MENSAJE ----")
     print("\nIVANOVICH")
+    print(f"p (primo): {p_i}")
+    print(f"q (primo): {q_i}")
+    print(f"n = {n_i}")
+    print(f"phi(n) = {phi_i}")
+    print(f"e (exponente público): {e_i}")
+    print(f"d (exponente privado): {d_i}")
     print("Llave pública:", llave_publica_ivanovich)
     print("Llave privada:", llave_privada_ivanovich)
-
+    
     print("\nDANIEL")
+    print(f"p (primo): {p_d}")
+    print(f"q (primo): {q_d}")
+    print(f"n = {n_d}")
+    print(f"phi(n) = {phi_d}")
+    print(f"e (exponente público): {e_d}")
+    print(f"d (exponente privado): {d_d}")
     print("Llave pública:", llave_publica_daniel)
     print("Llave privada:", llave_privada_daniel)
 

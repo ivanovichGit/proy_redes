@@ -55,11 +55,12 @@ def generar_llaves():
 
     return p, q, n, phi, e, d, (e, n), (d, n)
 
-# generamos las llaves y obtenemos todos los datos correspondiente para autoexplicarnos lo que esta sucediendo
-p, q, n, phi, e, d, llave_publica, llave_privada = generar_llaves()
 
 """""
-Comentarios de explicación ahora no necesarios.
+# Comentarios de explicación 
+# Generamos las llaves y obtenemos todos los datos correspondiente para autoexplicarnos lo que esta sucediendo
+p, q, n, phi, e, d, llave_publica, llave_privada = generar_llaves()
+
 print("Generamos las llaves\n")
 
 print(f"p (primo): {p}")
