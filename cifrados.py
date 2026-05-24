@@ -44,21 +44,3 @@ def descifrar_mensaje(mensaje_cifrado, clave):
         mensaje_descifrado += chr(ascii_descifrado)
     
     return mensaje_descifrado
-
-
-if __name__ == "__main__":
-
-    mensaje = "hola mundo"
-
-    clave = crear_clave_sesion()
-
-    print("Mensaje original:", mensaje)
-    print("Clave:", clave)
-
-    cifrado = cifrar_mensaje(mensaje, clave)
-
-    print("Mensaje cifrado:", cifrado)
-
-    descifrado = descifrar_mensaje(cifrado, clave)
-
-    print("Mensaje descifrado:", descifrado)
