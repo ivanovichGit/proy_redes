@@ -1,12 +1,8 @@
 import os
 
 def crear_clave_sesion():
-    # 1 byte y [0] extraer primer byte como número entero 0-255
-    clave_sesion = os.urandom(1)[0]
-    
-    # Por si sigue saliendo 0 no guardar ese dato
-    while clave_sesion == 0:
-        clave_sesion = os.urandom(1)[0]
+    # 1 byte y [0] extraer primer byte como número entero 1-256
+    clave_sesion = os.urandom(1)[0] + 1
         
     return clave_sesion 
 
