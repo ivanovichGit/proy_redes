@@ -1,4 +1,4 @@
-import random
+import os
 
 
 #con esta funcion validamos si un numero es o no primo
@@ -10,10 +10,15 @@ def es_primo(n):
             return False
     return True
 
-#generamos un numero primo entre 30 y 70 (en criptografia real se utilizaria un rango mucho mas grande)
+# Generamos un numero primo  100-3000 (en criptografia real se utilizaria un rango mucho mas grande)
 def generar_primo():
     while True:
-        num = random.randint(30, 70)
+        bytes_aleatorios = os.urandom(2)
+        num = int.from_bytes(bytes_aleatorios, "big")
+        num = 100 + (num % 2901)
+
+        if num % 2 == 0:
+            num += 1
         if es_primo(num):
             return num
 

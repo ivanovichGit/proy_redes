@@ -126,6 +126,7 @@ if __name__ == "__main__":
     print("\n6. Intento de descifrado con la llave privada de otro usuario")
     _, _, _, _, _, _, llave_publica_vanessa, llave_privada_vanessa = generar_llaves()
 
+    # En receptor.py ayuda a imprimir error 
     recibir_paquete(
         "paquete.json",
         llave_privada_vanessa
@@ -144,7 +145,7 @@ if __name__ == "__main__":
 
     # Validacion en receptor.py ayuda en esta validación 
     recibir_paquete(
-        "V7_paquete_incompleto.json",
+        "paquete_V7_incompleto.json",
         llave_privada_daniel
     )
 

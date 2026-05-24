@@ -29,7 +29,7 @@ def recibir_paquete(ruta_json, llave_privada_receptor):
     # Verificar que no falte ningun campo en el JSON 
     for campo in campos_json:
         if campo not in paquete:
-            print(f"Error: falta el campo '{campo}' en el JSON")
+            print(f"Error: Falta el campo '{campo}' en el JSON")
             return
     
     # Extraer datos JSON a variables
@@ -49,7 +49,11 @@ def recibir_paquete(ruta_json, llave_privada_receptor):
     clave_sesion = pow(clave_sesion_cifrada, d, n_receptor)
 
     # El receptor usa la clave de sesión para descifrar el mensaje.
-    mensaje_descifrado = descifrar_mensaje(mensaje_cifrado, clave_sesion)
+    try:
+        mensaje_descifrado = descifrar_mensaje(mensaje_cifrado, clave_sesion)
+    except ValueError:
+        print("La clave privada no corresponde al receptor o el mensaje fue alterado.")
+        return
 
     firma_valida = verificar(mensaje_descifrado, firma, llave_publica_emisor)
 
