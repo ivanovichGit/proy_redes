@@ -11,7 +11,7 @@ def crear_paquete(mensaje, emisor, receptor, llave_privada_emisor, llave_publica
     # El emisor genera una clave de sesión
     clave_sesion = crear_clave_sesion()
 
-    print("Clave de sesión creada:", clave_sesion)
+    print("\nClave de sesión creada:", clave_sesion)
 
     # El mensaje se cifra usando la clave de sesión
     mensaje_cifrado = cifrar_mensaje(mensaje, clave_sesion)
@@ -35,6 +35,7 @@ def crear_paquete(mensaje, emisor, receptor, llave_privada_emisor, llave_publica
         },
         "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     }
+
     # Se abre
     with open("paquete.json", "w") as archivo:
         json.dump(paquete, archivo, indent=4)
