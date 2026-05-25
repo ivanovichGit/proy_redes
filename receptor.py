@@ -46,7 +46,7 @@ def recibir_paquete(ruta_json, llave_privada_receptor):
     llave_publica_emisor = (e, n)
     timestamp = paquete["timestamp"]
 
-    # El receptor usa su llave privada RSA para recuperar la clave de sesión.
+    # El receptor usa su llave privada RSA para recuperar la clave de sesión
     # Recuperar la clave de sesión usando la llave privada del receptor
     d, n_receptor = llave_privada_receptor
     clave_sesion = pow(clave_sesion_cifrada, d, n_receptor)
