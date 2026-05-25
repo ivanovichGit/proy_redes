@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from firmar import firmar
 from cifrados import crear_clave_sesion
 from cifrados import cifrar_mensaje
@@ -31,7 +32,8 @@ def crear_paquete(mensaje, emisor, receptor, llave_privada_emisor, llave_publica
         "sender_public_key": {
             "e": llave_publica_emisor[0],
             "n": llave_publica_emisor[1]
-        }
+        },
+        "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     }
     # Se abre
     with open("paquete.json", "w") as archivo:

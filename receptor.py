@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 
 from cifrados import descifrar_mensaje
 from verificar import verificar
@@ -23,7 +24,8 @@ def recibir_paquete(ruta_json, llave_privada_receptor):
         "encrypted_message",
         "encrypted_session_key",
         "signature",
-        "sender_public_key"
+        "sender_public_key",
+        "timestamp"
     ]
 
     # Verificar que no falte ningun campo en el JSON 
@@ -42,6 +44,7 @@ def recibir_paquete(ruta_json, llave_privada_receptor):
     e = paquete["sender_public_key"]["e"]
     n = paquete["sender_public_key"]["n"]
     llave_publica_emisor = (e, n)
+    timestamp = paquete["timestamp"]
 
     # El receptor usa su llave privada RSA para recuperar la clave de sesión.
     # Recuperar la clave de sesión usando la llave privada del receptor
@@ -63,6 +66,8 @@ def recibir_paquete(ruta_json, llave_privada_receptor):
         print("De:", emisor)
 
         print("Para:", receptor)
+
+        print("Fecha y hora:", timestamp)
 
         print("Mensaje descifrado:", mensaje_descifrado)
     else:

@@ -124,11 +124,7 @@ if __name__ == "__main__":
     print("\n5. Intento de verificación con una llave pública incorrecta")
 
     _, _, _, _, _, _, otra_pub, otra_priv = generar_llaves()
-    firma_valida = verificar(
-        mensaje,
-        firma,
-        otra_pub
-    )
+    firma_valida = verificar(mensaje, firma, otra_pub)
     if firma_valida:
         print("Error: la firma fue validada con una llave incorrecta")
     else:
