@@ -54,31 +54,3 @@ def generar_llaves():
     d = inverso_modular(e, phi)
 
     return p, q, n, phi, e, d, (e, n), (d, n)
-
-
-"""""
-# Comentarios de explicación 
-# Generamos las llaves y obtenemos todos los datos correspondiente para autoexplicarnos lo que esta sucediendo
-p, q, n, phi, e, d, llave_publica, llave_privada = generar_llaves()
-
-print("Generamos las llaves\n")
-
-print(f"p (primo): {p}")
-print(f"q (primo): {q}")
-
-print("\n")
-print(f"n = {n}")
-print(f"phi(n) = {phi}")
-
-print("\n")
-print(f"e (exponente público): {e}")
-print(f"d (exponente privado): {d}")
-
-print("\n")
-print("LLAVES")
-print(f"Llave pblica: (e={e}, n={n})")
-print("(Esta llave se puede compartir)\n")
-
-print(f"Llave privada: (d={d}, n={n})")
-print("(Esta llave debe mantenerse en secreto)\n")
-"""
